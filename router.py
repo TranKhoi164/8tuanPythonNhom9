@@ -1,7 +1,7 @@
-from utils.globalVar import state
+from resources.utils.globalVar import state
 # import test2
-import utils.handleExceptions as error
-from utils.globalVar import address
+import resources.utils.handleExceptions as error
+from resources.utils.globalVar import address
 
 # addressId = 0
 # addressDatabase = [
