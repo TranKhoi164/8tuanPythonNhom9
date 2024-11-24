@@ -27,7 +27,7 @@ productId = 0
 products = [
     {
         "id": 0,
-        "category": "0",
+        "category": 0,
         "name": "Váy nữ viền lá sen thanh lịch",
         "description": "Váy cho bạn nữ để đi chơi & mặc ở nhà",
         "attributes": {
