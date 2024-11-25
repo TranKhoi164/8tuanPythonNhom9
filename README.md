@@ -10,20 +10,22 @@ Bài kiểm tra 8 tuần python nhóm 9
 - getProducts ()
 - getProduct(productId)
 
+// inventoryDictionary = {product, attribute, quantity, price}
 #### inventory:
-- createInventory(productId, attributes, quantity, price)
+- getInventoryOfProduct(productId)
+- createInventory(inventoryDictionary)
 - updateInventory(inventoryDictionary)
 
 #### category (200 - 299) ưu tiên
 - getCategories()
-- createCategory(categoryName, value) -admin
+- createCategory(categoryDictionary) -admin
 - deleteCategory(categoryId) -admin
 
 #### attribute (300 - 399) ưu tiên
-- createAttribute(attributeName) -admin
+- createAttribute(attributeDictionary) -admin
 - addAttributeValue(attributeName, value) -admin
-- deleteAttributeValue(attributeValue) -admin
-- getAttributes -admin
+- deleteAttributeValue(attributeName, attributeValue) -admin
+- getAttributes 
 
 #### address (400 - ) ưu tiên
 - getAddresses()
@@ -37,9 +39,10 @@ Bài kiểm tra 8 tuần python nhóm 9
 - removeFromCart(orderId)
 - purchaseAllProducts(orderIdList)
     call purchaseOrders(orderIdList)
-
+  
+// orderDictionary = {productId, inventoryId, addressId, status, quantity}
 #### order (600 - ) ưu tiên
-- createOrder(productId, inventoryId, addressId, status, quantity)
+- createOrder(orderDictionary)
 - getOrders()
 - getOrder(orderId)
 - updateOrders(orderDictionary)
