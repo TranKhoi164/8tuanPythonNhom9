@@ -51,11 +51,9 @@ def customerClient():
   select = input('')
 
 
-
 while True:
-  print('state:', state)
   if state == '0':
-    getUserRole()
+    getUserRole() 
   elif state == '1':
     adminClient()
   elif state == '2':
