@@ -5,7 +5,7 @@
 
 from resources.productCtrl import getProducts
 from resources.utils.stringFunc import updatePriceStr
-from resources.utils.globalVar import Products, productId, state
+from resources.utils.globalVar import Products, productId
 
 def showProductDetail(product):
   id = product["id"]
@@ -87,12 +87,10 @@ def clientCreateProduct():
     Products.append(newProduct)
     print('Tạo sản phẩm thành công!')
     print('--------\n')
-    state = '1'
   except Exception as e:
     print('Lỗi: ', repr(e))
     print('Tạo sản phẩm thất bại!')
     print('--------\n')
-    state = '1'
 
 
 
