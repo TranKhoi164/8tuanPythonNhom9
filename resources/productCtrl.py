@@ -1,4 +1,4 @@
-from resources.utils.globalVar import Products, productId
+from resources.utils.globalVar import Products, collectionIds
 from resources.utils.handleExceptions import elementNotFound
 
 # from utils.globalVar import Products, productId
@@ -8,8 +8,18 @@ def getProducts():
   global Products
   return Products
 
+# passing productIdList to get a list of product's infor
+def getProductsByIds(productIdList):
+  resProductList = []
 
-def getProduct(productId):
+  for productId in productIdList:
+    product = list(filter(lambda product: product['id'] == productId, Products))
+    resProductList.append(product[0])
+
+  return resProductList
+
+# passing productId to get product's infor
+def getProductById(productId):
   resProduct = list(filter(lambda product: product['id'] == productId, Products))
 
   if (len(resProduct) > 0):
@@ -17,17 +27,17 @@ def getProduct(productId):
   else:
     raise Exception(elementNotFound('sản phẩm'))
   
-  
+# passing a dict to create new product
 def createProduct(productDict):
-  global Products, productId
-  productId = productId + 1
-  productDict['id'] = productId
+  global Products, collectionIds
+  collectionIds['productId'] = collectionIds['productId'] + 1
+  productDict['id'] = collectionIds['productId']
   Products.append(productDict)
 
   msg = 'Tạo sản phẩm thành công!'
   return msg
 
-
+# passing a dict to update product
 def updateProduct(productDict):
   try:
     global Products
@@ -46,7 +56,7 @@ def updateProduct(productDict):
   except:
     raise Exception(elementNotFound("sản phẩm"))
 
-
+# passing a productId to delete
 def deleteProduct(productId):
   global Products
   try:
@@ -62,9 +72,7 @@ def deleteProduct(productId):
 
 
 # try:
-#   print(Products)
-#   print(deleteProduct(0))
-#   print(Products)
+#   print(getProductById(0))
 # except Exception as e:
 #   print(e)
 # finally:
