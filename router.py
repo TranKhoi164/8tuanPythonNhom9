@@ -1,34 +1,9 @@
 from resources.utils.globalVar import state
 # import test2
+import resources.utils.globalVar 
 import resources.utils.handleExceptions as error
-from resources.utils.globalVar import address
-
-# addressId = 0
-# addressDatabase = [
-
-# ]
-
-# updateAddress = {
-#   "ward": " phuong moi"
-# }
-
-# def createAddress(address, ward, district, province):
-#   global addressId
-#   newAddress = {
-#     "id": addressId,
-#     "address": address,
-#     "ward": ward,
-#     "district": district,
-#     "province": province
-#   } 
-#   addressId = addressId + 1
-
-#   addressDatabase.append(newAddress)
-
-# createAddress("197 minh khai", "vi hoang", "tp nam dinh", "nam dinh")
-# createAddress("27 minh khai", "vi xuyen", "tp nam dinh", "nam dinh")
-# print(addressDatabase)
-
+import resources.productCtrl as productCtrl 
+import resources.productClient as productClient
 
 
 # state 0
@@ -44,9 +19,11 @@ def getUserRole():
   else:
     state = '0'
     error.unavailableOption()
+  print('--------\n')
 
 # state 1
 def adminClient():
+  productClient.showProducts()
   print('1. Tạo sản phẩm')
   print('2. Xem sản phẩm')
   print('3. Xoá sản phẩm')
@@ -55,8 +32,9 @@ def adminClient():
   select = input('Chọn: ').strip()
 
   global state
-
-  if select == '4':
+  if select == "1":
+    state = '101'
+  elif select == '4':
     state = '0'
     print('--------\n')
   else:
@@ -80,5 +58,7 @@ while True:
     adminClient()
   elif state == '2':
     customerClient()
+  elif state == '101':
+    productClient.clientCreateProduct()
   else:
     break

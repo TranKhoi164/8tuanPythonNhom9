@@ -3,16 +3,16 @@ from datetime import datetime
 state = "0"
 
 categoryId = 0
-categories = [{"id": 0, "name": "váy"}]
+Categories = [{"id": 0, "name": "váy"}]
 
 attributeId = 1
-attributes = [
+Attributes = [
     {"id": 0, "name": "màu", "values": ["đỏ", "vàng"]},
     {"id": 1, "name": "kích thước", "values": ["l", "xl"]},
 ]
 
 addressId = 0
-addresses = [
+Addresses = [
     {
         "id": 0,
         "address": "197 minh khai",
@@ -24,17 +24,17 @@ addresses = [
 
 
 productId = 0
-products = [
+Products = [
     {
         "id": 0,
-        "category": "0",
+        "category": 0,
         "name": "Váy nữ viền lá sen thanh lịch",
         "description": "Váy cho bạn nữ để đi chơi & mặc ở nhà",
         "attributes": {
-            "màu ": ["đỏ", "vàng"],
+            "màu": ["đỏ", "vàng"],
             "kích thước": ["l", "xl"],
         },
-        "detail": [
+        "details": [
             {"key": "phong cách", "value": "thanh lịch"},
             {"key": "vòng eo", "value": "cao"},
             {"key": "sợi vải", "value": "căng nhẹ"},
@@ -46,7 +46,7 @@ products = [
     }
 ]
 
-inventories = [
+Inventories = [
     {
         "id": 0,
         "product": 0,
@@ -79,7 +79,7 @@ inventories = [
 
 now = datetime.now()
 orderId = 0
-orders = [
+Orders = [
     {
         "id": 0,
         "product": 0,

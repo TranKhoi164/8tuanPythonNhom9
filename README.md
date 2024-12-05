@@ -14,20 +14,22 @@ Bài kiểm tra 8 tuần python nhóm 9
 - createInventory(productId, attributes, quantity, price)
 - updateInventory(inventoryDictionary)
 
+categoryDict: {name, value}
 #### category (200 - 299) ưu tiên
 - getCategories()
-- createCategory(categoryName, value) -admin
+- createCategory(categoryDict) -admin
 - deleteCategory(categoryId) -admin
 
+attribtueDict: {name, value}
 #### attribute (300 - 399) ưu tiên
 - createAttribute(attributeName) -admin
-- addAttributeValue(attributeName, value) -admin
-- deleteAttributeValue(attributeValue) -admin
+- addAttributeValue(attributeDict) -admin
+- deleteAttributeValue(attributeDict) -admin
 - getAttributes -admin
 
 #### address (400 - ) ưu tiên
 - getAddresses()
-- createAddress(...)
+- createAddress(addressDictionary)
 - updateAddress(addressDictionary)
 - deleteAddress(addressId)
 
@@ -38,11 +40,12 @@ Bài kiểm tra 8 tuần python nhóm 9
 - purchaseAllProducts(orderIdList)
     call purchaseOrders(orderIdList)
 
+orderDict: {productId, inventoryId, addressId, status, quantity}
 #### order (600 - ) ưu tiên
-- createOrder(productId, inventoryId, addressId, status, quantity)
+- createOrder(orderDict)
 - getOrders()
 - getOrder(orderId)
-- updateOrders(orderDictionary)
+- updateOrders(orderDict)
 - deleteOrder(orderId)
 - purchaseOrders(orderIdList)
   
