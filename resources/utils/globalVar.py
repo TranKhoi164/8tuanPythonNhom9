@@ -1,17 +1,25 @@
 from datetime import datetime
 
-state = "0"
+state = {
+  'value': '0'
+}
 
-categoryId = 0
+collectionIds = {
+  'categoryId': 0,
+  'attributeId': 1,
+  'addressId': 0,
+  'productId': 0,
+  'inventoryId': 3,
+  'orderId': 0
+}
+
 Categories = [{"id": 0, "name": "váy"}]
 
-attributeId = 1
 Attributes = [
     {"id": 0, "name": "màu", "values": ["đỏ", "vàng"]},
     {"id": 1, "name": "kích thước", "values": ["l", "xl"]},
 ]
 
-addressId = 0
 Addresses = [
     {
         "id": 0,
@@ -23,7 +31,6 @@ Addresses = [
 ]
 
 
-productId = 0
 Products = [
     {
         "id": 0,
@@ -78,7 +85,6 @@ Inventories = [
 ]
 
 now = datetime.now()
-orderId = 0
 Orders = [
     {
         "id": 0,
