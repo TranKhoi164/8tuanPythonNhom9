@@ -1,11 +1,11 @@
 
-from productCtrl import getProducts
-from utils.stringFunc import updatePriceStr
-from utils.globalVar import Products, productId, state
+# from productCtrl import getProducts
+# from utils.stringFunc import updatePriceStr
+# from utils.globalVar import Products, productId, state
 
-# from resources.productCtrl import getProducts
-# from resources.utils.stringFunc import updatePriceStr
-# from resources.utils.globalVar import Products, productId, state
+from resources.productCtrl import getProducts
+from resources.utils.stringFunc import updatePriceStr
+from resources.utils.globalVar import Products, productId, state
 
 def showProductDetail(product):
   id = product["id"]
@@ -92,9 +92,10 @@ def clientCreateProduct():
     print('Lỗi: ', repr(e))
     print('Tạo sản phẩm thất bại!')
     print('--------\n')
+    state = '1'
 
 
 
-clientCreateProduct()
-showProducts()
+# clientCreateProduct()
+# showProducts()
 # showProducts()

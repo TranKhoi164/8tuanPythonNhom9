@@ -34,6 +34,7 @@ def adminClient():
   global state
   if select == "1":
     state = '101'
+    print('--------\n')
   elif select == '4':
     state = '0'
     print('--------\n')
@@ -52,6 +53,7 @@ def customerClient():
 
 
 while True:
+  print('state:', state)
   if state == '0':
     getUserRole()
   elif state == '1':
@@ -60,5 +62,6 @@ while True:
     customerClient()
   elif state == '101':
     productClient.clientCreateProduct()
+    state = '1'
   else:
     break

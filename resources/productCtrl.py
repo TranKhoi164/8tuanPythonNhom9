@@ -1,8 +1,8 @@
-# from resources.utils.globalVar import Products, productId
-# from resources.utils.handleExceptions import elementNotFound
+from resources.utils.globalVar import Products, productId
+from resources.utils.handleExceptions import elementNotFound
 
-from utils.globalVar import Products, productId
-from utils.handleExceptions import elementNotFound
+# from utils.globalVar import Products, productId
+# from utils.handleExceptions import elementNotFound
 
 def getProducts():
   global Products
