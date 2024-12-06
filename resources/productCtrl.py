@@ -51,13 +51,13 @@ def updateProduct(productDict):
     for key in productDict: 
       Products[indx][key] = productDict[key]
     
-    msg = 'cập nhập sản phẩm thành công!'
+    msg = 'cập nhật sản phẩm thành công!'
     return msg
   except:
     raise Exception(elementNotFound("sản phẩm"))
 
 # passing a productId to delete
-def deleteProduct(productId):
+def deleteProductById(productId):
   global Products
   try:
     reqProduct = list(filter(lambda product: product['id'] == productId, Products))
@@ -65,8 +65,8 @@ def deleteProduct(productId):
 
     msg = 'Xóa sản phẩm thành công!'
     return msg
-  except: 
-    return elementNotFound('sản phẩm')
+  except Exception as e: 
+    raise Exception(elementNotFound('sản phẩm')) 
   
     
 

@@ -3,9 +3,9 @@
 # from utils.stringFunc import updatePriceStr
 # from utils.globalVar import Products, productId, state
 
-from resources.productCtrl import getProducts, createProduct, getProductById
+from resources.productCtrl import getProducts, createProduct, getProductById, deleteProductById
 from resources.utils.stringFunc import updatePriceStr
-from resources.utils.globalVar import collectionIds, Products, Attributes, state
+from resources.utils.globalVar import collectionIds, Products, Attributes, state, role
 
 
 def showProductPreview(product):
@@ -121,6 +121,8 @@ def enterOrderInfor(attributes):
 
   print(attributeDict)
   print('quantity:', orderQuantity)
+  orderDict = {}
+  return orderDict
 
 
 
@@ -128,13 +130,33 @@ def enterOrderInfor(attributes):
 def clientProductDetail(productId):
   product = getProductById(productId)
   showProductDetail(product)
-  detailOption = input('1. Mua sản phẩm\n2. Thêm sản phẩm vào giỏ hàng\n3. Quay lại\nChọn: ')
+  
+  if role['value'] == '1':
+    detailOption = input('1. Sửa sản phẩm\n2. Quay lại\nChọn: ')
 
-  if detailOption == '1':
-    enterOrderInfor(product['attributes'])
-  elif detailOption == "3":
-    state['value'] = '1'
-    return
+    if detailOption == '1':
+      enterOrderInfor(product['attributes'])
+    elif detailOption == "2":
+      enterOrderInfor(product['attributes'])
+    elif detailOption == "3":
+      return
+  elif role['value'] == '2':
+    detailOption = input('1. Mua sản phẩm\n2. Thêm sản phẩm vào giỏ hàng\n3. Quay lại\nChọn: ')
+
+    if detailOption == '1':
+      enterOrderInfor(product['attributes'])
+    elif detailOption == "2":
+      enterOrderInfor(product['attributes'])
+    elif detailOption == "3":
+      return
+    
+
+def clientDeleteProduct(productId):
+  try:
+    print(deleteProductById(productId))
+  except Exception as e:
+    print(e)
+  
 
 
 

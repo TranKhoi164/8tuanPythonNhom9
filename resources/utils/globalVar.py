@@ -1,5 +1,9 @@
 from datetime import datetime
 
+role = {
+  'value': '0'
+}
+
 state = {
   'value': '0'
 }
