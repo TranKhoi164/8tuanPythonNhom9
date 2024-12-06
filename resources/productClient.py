@@ -3,39 +3,9 @@
 # from utils.stringFunc import updatePriceStr
 # from utils.globalVar import Products, productId, state
 
-from resources.productCtrl import getProducts, createProduct
+from resources.productCtrl import getProducts, createProduct, getProductById
 from resources.utils.stringFunc import updatePriceStr
 from resources.utils.globalVar import collectionIds, Products, Attributes, state
-
-
-def showProductDetail(product):
-  id = product["id"]
-  name = product["name"]
-  attributes = product["attributes"] or {}
-  description = product["description"]
-  details = product["details"]
-  category = product["category"]
-  price = product["price"]
-  minPrice = product["minPrice"]
-  maxPrice = product["maxPrice"]
-  
-  print('id: ', id)
-  print(name)
-
-  print('Thuộc tính')
-  for i in attributes:
-    print(' ', i+':', attributes[i])
-
-  if minPrice != maxPrice:
-    print('Mức giá:',updatePriceStr(minPrice),'-', updatePriceStr(maxPrice))
-  else:
-    print('Mức giá:', updatePriceStr(price))
-
-  print('Chi tiết sản phẩm')
-  for i in details:
-    print(' ',i['key']+':', i['value'])
-
-  print('Mô tả: ', description)
 
 
 def showProductPreview(product):
@@ -53,6 +23,40 @@ def showProductPreview(product):
     print('Giá:', updatePriceStr(price))
 
 
+def showProductDetail(product):
+  id = product["id"]
+  name = product["name"]
+  attributes = product["attributes"] or {}
+  description = product["description"]
+  details = product["details"]
+  category = product["category"]
+  quantity = product['quantity']
+  price = product["price"]
+  minPrice = product["minPrice"]
+  maxPrice = product["maxPrice"]
+  
+  print('id:', id)
+  print(name)
+
+  print('Thuộc tính')
+  for i in attributes:
+    print(' ', str(i)+':', attributes[i])
+
+  if minPrice != maxPrice:
+    print('Mức giá:',updatePriceStr(minPrice),'-', updatePriceStr(maxPrice))
+  else:
+    print('Mức giá:', updatePriceStr(price))
+  
+  print('Số lượng:', quantity)
+
+  print('Chi tiết sản phẩm')
+  for i in details:
+    print(' ',i['key']+':', i['value'])
+
+  print('Mô tả: ', description)
+
+
+
 def showProductsPreview(products):
   print('--------Sản phẩm--------')
   # products = getProducts()
@@ -68,21 +72,21 @@ def clientCreateProduct():
     newProduct = dict()
     
     newProduct['name'] = input('Nhập tên sản phẩm: ').strip().capitalize()
-    newProduct['price'] = int(input('Nhập mức giá chung: ').strip())
+    newProduct['price'] = int(input('Nhập mức giá chung: '))
     newProduct['minPrice'] = newProduct['price']
     newProduct["maxPrice"] = newProduct['price']
+    newProduct['quantity'] = int(input('Nhập số lượng chung: '))
     newProduct['category'] = int(input('Nhập id danh mục: '))
 
     attributesLen = int(input('Số thuộc tính của sản phẩm: '))
-    attributesArr = []
+    attributesDict = {}
     for i in range(0, attributesLen):
-      newAttribute = {}
       print(str(i+1)+'.')
-      newAttribute['name'] = input('name: ').strip()
+      attributeName = input('name: ').strip()
       tempArr = input('values (phân cách bởi dấu ","): ').split(',')
-      newAttribute['values'] = {s.strip() for s in tempArr}
-      attributesArr.append(newAttribute)
-    newProduct['attributes'] = attributesArr
+      attributeValues = {s.strip() for s in tempArr}
+      attributesDict[attributeName] = attributeValues
+    newProduct['attributes'] = attributesDict
 
     detailsLen = int(input('Số chi tiết của sản phẩm: '))
     detailsArr = []
@@ -95,6 +99,8 @@ def clientCreateProduct():
     newProduct["details"] = detailsArr
 
     newProduct['description'] = input('Nhập mô tả: ').strip().capitalize()
+
+    print(newProduct)
     print()
     print(createProduct(newProduct))
     # print('Tạo sản phẩm thành công!')
@@ -104,6 +110,32 @@ def clientCreateProduct():
     print('Tạo sản phẩm thất bại!')
     print('--------\n')
     state['value'] = '1'
+
+
+def enterOrderInfor(attributes):
+  attributeDict = {}
+  for i in attributes:
+    attValue = input('Giá trị thuộc tính ' + i + ': ').strip()
+    attributeDict[i] = attValue
+  orderQuantity = int(input('Số lượng: '))
+
+  print(attributeDict)
+  print('quantity:', orderQuantity)
+
+
+
+# state 102
+def clientProductDetail(productId):
+  product = getProductById(productId)
+  showProductDetail(product)
+  detailOption = input('1. Mua sản phẩm\n2. Thêm sản phẩm vào giỏ hàng\n3. Quay lại\nChọn: ')
+
+  if detailOption == '1':
+    enterOrderInfor(product['attributes'])
+  elif detailOption == "3":
+    state['value'] = '1'
+    return
+
 
 
 

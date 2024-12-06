@@ -1,3 +1,4 @@
+# chuyển dạng price vd 30000 => 30.000đ
 def updatePriceStr(price):
   price = str(price)
   i = len(price) - 3

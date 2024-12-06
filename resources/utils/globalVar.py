@@ -41,6 +41,7 @@ Products = [
             "màu": ["đỏ", "vàng"],
             "kích thước": ["l", "xl"],
         },
+        "quantity": 115,
         "details": [
             {"key": "phong cách", "value": "thanh lịch"},
             {"key": "vòng eo", "value": "cao"},

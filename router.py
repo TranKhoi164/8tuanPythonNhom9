@@ -36,6 +36,9 @@ def adminClient():
   if select == "1":
     state['value'] = '101'
     print('--------\n')
+  elif select == "2":
+    state['value'] = '102'
+    print('--------\n')
   elif select == '4':
     state['value'] = '0'
     print('--------\n')
@@ -74,6 +77,10 @@ while True:
     customerClient()
   elif state['value'] == '101':
     productClient.clientCreateProduct()
+    state['value'] = '1'
+  elif state['value'] == '102':
+    productId = int(input("Nhập id sản phẩm: "))
+    productClient.clientProductDetail(productId)
     state['value'] = '1'
   else:
     break
