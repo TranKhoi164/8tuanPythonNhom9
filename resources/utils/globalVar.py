@@ -102,3 +102,10 @@ Orders = [
         "updatedAt": now.strftime('%d-%m-%Y %H:%M'),
     }
 ]
+
+Cart = [
+  {
+    'id': 0,
+    'order': 0
+  }
+]
