@@ -35,7 +35,7 @@ def createProduct(productDict):
   Products.append(productDict)
 
   msg = 'Tạo sản phẩm thành công!'
-  return msg
+  return {'msg': msg, 'product': productDict}
 
 # passing a dict to update product
 def updateProduct(productDict):

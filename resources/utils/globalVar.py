@@ -14,7 +14,8 @@ collectionIds = {
   'addressId': 0,
   'productId': 0,
   'inventoryId': 3,
-  'orderId': 0
+  'orderId': 0,
+  'cartId': 0
 }
 
 Categories = [{"id": 0, "name": "váy"}]

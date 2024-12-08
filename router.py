@@ -3,6 +3,7 @@ from resources.utils.globalVar import state, Products, role
 import resources.utils.handleExceptions as error
 import resources.productCtrl as productCtrl 
 import resources.productClient as productClient
+import resources.utils.globalVar as globalVar
 
 
 # state 0
@@ -84,6 +85,8 @@ while True:
   elif state['value'] == '101':
     # tao san pham
     productClient.clientCreateProduct()
+    print(globalVar.Attributes)
+    print(globalVar.Inventories)
     state['value'] = '1'
   elif state['value'] == '102':
     # xem chi tiet san pham
