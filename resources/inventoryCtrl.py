@@ -2,7 +2,6 @@
 # from utils.globalVar import Inventories ,collectionIds
 # from utils.handleExceptions import elementNotFound
 
-# from utils.globalVar import Inventories, collectionIds
 from resources.utils.globalVar import Inventories, collectionIds
 from resources.utils.handleExceptions import elementNotFound
 
@@ -71,13 +70,17 @@ def them_san_pham(n):
         return mss
 
 
-def showinventory(n):
+def getInventoriesByProductId(n):
     n = int(n)
     listinvent = []
     for inve in Inventories:
         if inve["product"] == n:
             listinvent.append(inve)
     return listinvent
+# TODO: test updateInventory
+# test = 0
+# t = getInventoriesByProductId(test)
+# print(getInventoriesByProductId(test))
 
 
 def showIN4inventory(n):
@@ -106,6 +109,7 @@ def updateInventory(inventoryDict):
 #         "price": 2000000,}
 # t = updateInventory(test)
 # print(t['inventory'])
+
 
 
 # <<<<<<< Updated upstream

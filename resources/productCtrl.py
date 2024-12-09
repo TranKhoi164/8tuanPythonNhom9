@@ -38,7 +38,7 @@ def createProduct(productDict):
   return {'msg': msg, 'product': productDict}
 
 # passing a dict to update product
-def updateProduct(productDict):
+def updateProductById(productDict):
   try:
     global Products
 
@@ -52,7 +52,7 @@ def updateProduct(productDict):
       Products[indx][key] = productDict[key]
     
     msg = 'cập nhật sản phẩm thành công!'
-    return msg
+    return {'msg': msg}
   except:
     raise Exception(elementNotFound("sản phẩm"))
 

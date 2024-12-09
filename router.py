@@ -93,11 +93,16 @@ while True:
     productId = int(input("Nhập id sản phẩm: "))
     productClient.clientProductDetail(productId)
     
-    if role['value'] == '1': state['value'] = '1'
-    elif role["value"] == "2": state["value"] = "2"
+    if role['value'] == '1': 
+      state['value'] = '1'
+    elif role["value"] == "2": 
+      state["value"] = "2"
+
   elif state['value'] == '103':
     productId = int(input("Nhập id sản phẩm: "))
     productClient.clientDeleteProduct(productId)
     state['value'] = '1'
+
+    
   else:
     break
