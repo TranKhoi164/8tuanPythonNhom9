@@ -12,8 +12,24 @@ from orderCtrl import createOrder, getOrderById, getOrderByStatus
 
 def showOrderInfo(idOrder):
     order = getOrderById(idOrder)
-    if order['status'] == 'done' :
-        product = getProductById(order['product'])
+    product = getProductById(order['product'])
+    orderInventory = getInventoryById(order['inventory'])
+    namePro = product['name']
+    print(f'Đơn hàng tạo vào lúc: {order['createdAt']}')
+    print('Số lượng:', order['quantity'])
+    print('Sản phẩm:', namePro)
+    print(f'Giá tiền: {updatePriceStr(orderInventory['price'] * order['quantity'])}')
+    print('Loại sản phẩm: ', orderInventory['attribute'])
+
+def showOrdersInfor(orderIds):
+    for i in orderIds:
+        print(str(i+1) + '.')
+        showOrderInfo(i)
+
+def showOrderByStatus(status = 'done'):
+    orders = getOrderByStatus(status)
+    for order in orders :
+        product = getProductById(int(order['product']))
         orderInventory = getInventoryById(order['inventory'])
         namePro = product['name']
         print(f'Đơn hàng tạo vào lúc: {order['createdAt']}')
@@ -21,13 +37,13 @@ def showOrderInfo(idOrder):
         print('Sản phẩm:', namePro)
         print(f'Giá tiền: {updatePriceStr(orderInventory['price'] * order['quantity'])}')
         print('Loại sản phẩm: ', orderInventory['attribute'])
-        print('Thanh toán thành công!')
+        print('Đã thanh toán thành công!')
 
-def showOrdersInfor(orderIds):
-    for i in orderIds:
-        print(str(i+1) + '.')
-        showOrderInfo(i)
-
+def showOrdersByStatus(numOrder):
+    for num in numOrder:
+        print(str(num + 1) + '.')
+        showOrderByStatus()
 
 # todo test createOrder function
 showOrdersInfor([0])
+showOrdersByStatus([0, 1])

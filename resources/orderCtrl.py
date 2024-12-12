@@ -15,7 +15,11 @@ def getOrderById(orderId):
   order = list(filter(lambda order: order['id'] == orderId, Orders))
   return order[0]
 
-# print(getOrderById(0))
+def getOrderByStatus(status):
+  order = list(filter(lambda order: order['status'] == status, Orders))
+  return order
+
+# print(getOrderByStatus('done'))
 
 def createOrder(orderDict):
   try:
@@ -46,6 +50,4 @@ def deleteOrders(orderId):
 #             "quantity": 2 }
 # createOrder(newOrder)
 # createOrder(newOrder)
-# deleteOrders(3)
-# print(Orders)
 
