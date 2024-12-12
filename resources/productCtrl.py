@@ -1,8 +1,8 @@
-from resources.utils.globalVar import Products, collectionIds
-from resources.utils.handleExceptions import elementNotFound
+# from resources.utils.globalVar import Products, collectionIds
+# from resources.utils.handleExceptions import elementNotFound
 
-# from utils.globalVar import Products, productId
-# from utils.handleExceptions import elementNotFound
+from utils.globalVar import Products
+from utils.handleExceptions import elementNotFound
 
 def getProducts():
   global Products
@@ -20,6 +20,7 @@ def getProductsByIds(productIdList):
 
 # passing productId to get product's infor
 def getProductById(productId):
+  productId = int(productId)
   resProduct = list(filter(lambda product: product['id'] == productId, Products))
 
   if (len(resProduct) > 0):

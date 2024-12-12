@@ -2,7 +2,6 @@ from utils.globalVar import Orders, collectionIds
 from utils.handleExceptions import elementNotFound, unavailableOption
 # from resources.utils.globalVar import Orders, collectionIds
 from datetime import datetime
-
 # todo: khoi them
 now = datetime.now()
 

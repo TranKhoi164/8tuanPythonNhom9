@@ -45,5 +45,5 @@ def showOrdersByStatus(numOrder):
         showOrderByStatus()
 
 # todo test createOrder function
-showOrdersInfor([0])
-showOrdersByStatus([0, 1])
+# showOrdersInfor([0])
+# showOrdersByStatus([0, 1])

@@ -1,9 +1,9 @@
 # <<<<<<< Updated upstream
-# from utils.globalVar import Inventories ,collectionIds
-# from utils.handleExceptions import elementNotFound
+from utils.globalVar import Inventories ,collectionIds
+from utils.handleExceptions import elementNotFound
 
-from resources.utils.globalVar import Inventories, collectionIds
-from resources.utils.handleExceptions import elementNotFound
+# from resources.utils.globalVar import Inventories, collectionIds
+# from resources.utils.handleExceptions import elementNotFound
 
 
 # =======
@@ -83,13 +83,14 @@ def getInventoriesByProductId(n):
 # print(getInventoriesByProductId(test))
 
 
-def showIN4inventory(n):
+def getInventoryById(n):
     n = int(n)
     listtrave = []
     for inve in Inventories:
         if inve["id"] == n:
             listtrave.append(inve)
-    return listtrave
+    return listtrave[0]
+# print(showIN4inventory(0))
 
 
 def updateInventory(inventoryDict):
@@ -111,7 +112,7 @@ def updateInventory(inventoryDict):
 # print(t['inventory'])
 
 
-
+# print(showIN4inventory(0))
 # <<<<<<< Updated upstream
 
 # =======

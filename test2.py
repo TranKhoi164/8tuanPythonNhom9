@@ -24,6 +24,7 @@ def generateInventory(attributes):
   attKeys = attributes.keys()
   getAllProductType(0, attributes)
 
+print('Hello')
 
 # getAllProductType(0)
 # tempAttributes = [{**i, 'price': '115'} for i in tempAttributes]
