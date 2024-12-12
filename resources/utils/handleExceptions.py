@@ -6,3 +6,6 @@ def unavailableOption():
 def elementNotFound(collectionName):
   return 'Không tìm thấy ' + collectionName + '!'
 
+def notExist():
+  return 'Không có đơn hàng nào đã thanh toán!'
+
