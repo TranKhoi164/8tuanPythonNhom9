@@ -1,9 +1,9 @@
-# pythonEcommerceProject
+ pythonEcommerceProject
 Bài kiểm tra 8 tuần python nhóm 9
 
 ## Services
 
-#### product (100 - 199)
+#### product (state 100 - 199)
 - createProduct () - admin
 - updateProduct(productId) - admin
 - deleteProduct(productId) - admin
@@ -15,25 +15,25 @@ Bài kiểm tra 8 tuần python nhóm 9
 - updateInventory(inventoryDictionary)
 
 categoryDict: {name, value}
-#### category (200 - 299) ưu tiên
+#### category (state 200 - 299) ưu tiên
 - getCategories()
 - createCategory(categoryDict) -admin
 - deleteCategory(categoryId) -admin
 
 attribtueDict: {name, value}
-#### attribute (300 - 399) ưu tiên
+#### attribute (state 300 - 399) ưu tiên
 - createAttribute(attributeName) -admin
 - addAttributeValue(attributeDict) -admin
 - deleteAttributeValue(attributeDict) -admin
 - getAttributes -admin
 
-#### address (400 - ) ưu tiên
+#### address (state 400 - ) ưu tiên
 - getAddresses()
 - createAddress(addressDictionary)
 - updateAddress(addressDictionary)
 - deleteAddress(addressId)
 
-#### cart (500 -)
+#### cart (state 500 -)
 - getOrdersInCart()
 - addToCart(orderId)
 - removeFromCart(orderId)
@@ -41,7 +41,7 @@ attribtueDict: {name, value}
     call purchaseOrders(orderIdList)
 
 orderDict: {productId, inventoryId, addressId, status, quantity}
-#### order (600 - ) ưu tiên
+#### order (state 600 - ) ưu tiên
 - createOrder(orderDict)
 - getOrders()
 - getOrder(orderId)
@@ -51,11 +51,12 @@ orderDict: {productId, inventoryId, addressId, status, quantity}
   
 
 ## Phân công
-- product, inventory: Khoi, Quang
+- product: Khoi
+- inventory, address: quang
 - category, attribute: hieu
-- address, cart: hung
+
+- cart: hung
 - order: khanh
 
 ## Database
-![Screenshot 2024-11-24 170936](https://github.com/user-attachments/assets/144ae1d1-4419-4890-81f1-f675bd6e6b13)
-
+<img width="672" alt="Ảnh chụp Màn hình 2024-12-13 lúc 14 07 14" src="https://github.com/user-attachments/assets/a042147d-4794-497d-949e-a73951408eed" />
