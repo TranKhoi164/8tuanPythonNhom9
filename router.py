@@ -49,8 +49,9 @@ def adminClient():
     state['value'] = '200'
     print('--------\n')
   else:
-    state['value'] = '1'
-    error.unavailableOption()
+    state['value'] = '0'
+    print('--------\n')
+    # error.unavailableOption()
 
 # state 2
 def customerClient():
@@ -75,9 +76,9 @@ def customerClient():
     state['value'] = '400'
   elif select == '5':
     state['value'] = '0'
-    print('--------\n')
+    # print('--------\n')
   else:
-    state['value'] = '1'
+    state['value'] = '0'
     error.unavailableOption()
 
 
@@ -86,6 +87,7 @@ while True:
     getUserRole() 
   elif state['value'] == '1':
     adminClient()
+    
   elif state['value'] == '2':
     customerClient()
   elif state['value'] == '101':
@@ -120,4 +122,4 @@ while True:
     orderClient.clientOrder()
     state['value'] = '2'
   else:
-    state['value'] = '0'
+    break
