@@ -1,5 +1,5 @@
-from utils.globalVar import Categories, collectionIds
-from utils.handleExceptions import elementNotFound
+from resources.utils.globalVar import Categories, collectionIds
+from resources.utils.handleExceptions import elementNotFound
 # from resources.utils.globalVar import state, Categories
 
 #state 200

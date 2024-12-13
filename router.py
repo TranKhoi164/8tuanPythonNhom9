@@ -1,9 +1,10 @@
-from resources.utils.globalVar import state, Products, role
+from resources.utils.globalVar import state, Products, role, Categories
 # import test2
 import resources.utils.handleExceptions as error
 import resources.productCtrl as productCtrl 
 import resources.productClient as productClient
 import resources.utils.globalVar as globalVar
+import resources.categoryClient as categoryClient
 
 
 # state 0
@@ -44,6 +45,9 @@ def adminClient():
     print('--------\n')
   elif select == "3":
     state['value'] = '103'
+    print('--------\n')
+  elif select == "4":
+    state['value'] = '200'
     print('--------\n')
   elif select == '6':
     state['value'] = '0'
@@ -101,6 +105,10 @@ while True:
     productClient.clientDeleteProduct(productId)
     state['value'] = '1'
 
+  elif state['value'] == '200':
+    categoryClient.clientCategory()
+    state['value'] = '1'
+      
     
   else:
     break

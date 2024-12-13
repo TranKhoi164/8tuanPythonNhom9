@@ -3,10 +3,10 @@
 
 #state 200
 # =======
-from utils.globalVar import Categories, state
-from categoryCtrl import createCategory, deleteCategoryById
+from resources.utils.globalVar import Categories, state
+from resources.categoryCtrl import createCategory, deleteCategoryById
 
-state = '0'
+# state = '0'
 #state 200
 
 # >>>>>>> Stashed changes
@@ -16,16 +16,16 @@ def clientCategory():
   print("1. Tạo danh mục")
   print("2. Xóa danh mục")
   print("3. Quay lại")
-  select = input()
-  if select == '4':
-    return
+  select = input('Chọn: ').strip()
+  if select == '1':
+      clientCreateCategory()
+  elif select =='2':
+      clientDeleteCategory()
+  else:
+      return  
 # <<<<<<< Updated upstream
   
 # =======
-  elif select == '1':
-      state = '1'
-  elif select == '2':
-      state ='2'
 
 
 # TODO: state 201
@@ -60,8 +60,10 @@ def clientDeleteCategory():
     cateId = int(input("Nhập id danh mục bạn muốn xóa:"))
     try:
         print(deleteCategoryById(cateId))
+        print('--------\n')
     except Exception as e:
         print(e)
+
 
 
     
@@ -71,14 +73,20 @@ def clientDeleteCategory():
 # while True:
 #     if state == '0':
 #         clientCategory()
+#         print(Categories)
+      
 #     elif state =='1':
 #         clientCreateCategory()
+#         print(Categories)
+#         state = '0'
 #     elif state == '2':
 #         clientDeleteCategory()
+#         print(Categories)
+#         state = '0'
 #     elif state  == 'exit':
 #         print("Kết thúc chương trình.")
 #         break
 #     else:
 #         print("Lỗi trạng thái không hợp lệ!")
 #         break
-# >>>>>>> Stashed changes
+# # >>>>>>> Stashed changes
