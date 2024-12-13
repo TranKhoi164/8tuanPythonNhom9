@@ -91,6 +91,13 @@ def showIN4inventory(n):
             listtrave.append(inve)
     return listtrave
 
+def getInventoriesById(id):
+    resDict = {}
+    for inve in Inventories:
+        if inve["id"] == int(id):
+            resDict = inve
+    return resDict
+
 def getInventoryByProductIdAndAttribute(inventoryObj):
     reqInventory = list(filter(
         lambda i: i['attribute'] == inventoryObj['attribute'] and i['product'] == inventoryObj['productId'], Inventories))
