@@ -3,15 +3,15 @@ from resources.utils.handleExceptions import elementNotFound
 # from resources.utils.globalVar import state, Categories
 
 #state 200
-def createCategory(categoryDict):
-  try:
-    categorynew = categoryDict.copy()
-    collectionIds['categoryId'] += 1
-    categorynew['id'] = collectionIds['categoryId']
-    Categories.append(categorynew)
-    return categorynew
-  except:
-    raise Exception('')
+# def createCategory(categoryDict):
+#   try:
+#     categorynew = categoryDict.copy()
+#     collectionIds['categoryId'] += 1
+#     categorynew['id'] = collectionIds['categoryId']
+#     Categories.append(categorynew)
+#     return categorynew
+#   except:
+#     raise Exception('')
 
 # todo test category
 # newCategory = {'name': 'test'}
@@ -43,6 +43,12 @@ def createCategory(categoryDict):
 
   msg = 'Tạo danh mục thành công!'
   return {'msg': msg, 'category': categoryDict}
+
+def getCategoryById(categoryId):
+  req = list(filter(lambda category: category['id'] == categoryId, Categories))
+  if (len(req) == 0):
+    raise Exception(elementNotFound('danh mục'))
+  return req[len(req)-1]
 
 
 def updateCategoryById(categoryDict):
