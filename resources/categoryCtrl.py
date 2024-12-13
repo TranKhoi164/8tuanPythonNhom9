@@ -18,6 +18,9 @@ from resources.utils.handleExceptions import elementNotFound
 # createCategory(newCategory)
 # print(Categories)
 
+def getCategories():
+  return Categories
+
 def deleteCategoryById(CategoryId):
   global Categories
   try:

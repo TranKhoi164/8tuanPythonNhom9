@@ -28,6 +28,29 @@ def createOrder(orderDict):
     return newOrder
   except:
     raise Exception('Thêm order thất bại!')
+  
+def getOrdersByStatus(status):
+  order = list(filter(lambda order: order['status'] == status, Orders))
+  return order 
+
+# passing a dict to update product
+def updateOrderById(orderDict):
+  try:
+    global Orders
+
+    req = list(filter(lambda order: order['id'] == orderDict['id'], Orders))
+
+    if len(req) == 0:
+      raise Exception(elementNotFound("đơn hàng"))
+    indx = Orders.index(req[0])
+
+    for key in orderDict: 
+      Orders[indx][key] = orderDict[key]
+    
+    msg = 'cập nhật đơn hàng thành công!'
+    return {'msg': msg}
+  except:
+    raise Exception(elementNotFound("đơn hàng"))
 
 def deleteOrders(orderId):
   try :

@@ -5,6 +5,10 @@ import resources.productCtrl as productCtrl
 import resources.productClient as productClient
 import resources.utils.globalVar as globalVar
 import resources.categoryClient as categoryClient
+import resources.cartClient as cartClient
+import resources.orderClient as orderClient
+import resources.addressClient as addressClient
+
 
 
 # state 0
@@ -29,10 +33,8 @@ def adminClient():
   productClient.showProductsPreview(Products)
   print('1. Tạo sản phẩm')
   print('2. Xem sản phẩm')
-  print('3. Xoá sản phẩm')
-  print('4. Quản lý danh mục')
-  print('5. Quản lý thuộc tính')
-  print('6. Quay lại')
+  print('3. Quản lý danh mục')
+  print('4. Quay lại')
 
   select = input('Chọn: ').strip()
 
@@ -44,13 +46,7 @@ def adminClient():
     state['value'] = '102'
     print('--------\n')
   elif select == "3":
-    state['value'] = '103'
-    print('--------\n')
-  elif select == "4":
     state['value'] = '200'
-    print('--------\n')
-  elif select == '6':
-    state['value'] = '0'
     print('--------\n')
   else:
     state['value'] = '1'
@@ -71,6 +67,12 @@ def customerClient():
   if select == "1":
     state['value'] = '102'
     print('--------\n')
+  elif select == '2':
+    state['value'] = '500'
+  elif select == '3':
+    state['value'] = '600'
+  elif select == '4':
+    state['value'] = '400'
   elif select == '5':
     state['value'] = '0'
     print('--------\n')
@@ -108,7 +110,14 @@ while True:
   elif state['value'] == '200':
     categoryClient.clientCategory()
     state['value'] = '1'
-      
-    
+  elif state['value'] == '400':
+    addressClient.clientAddress()
+    state['value'] = '2'
+  elif state['value'] == '500':
+    cartClient.clientCart()
+    state['value'] = '2'
+  elif state['value'] == '600':
+    orderClient.clientOrder()
+    state['value'] = '2'
   else:
-    break
+    state['value'] = '0'

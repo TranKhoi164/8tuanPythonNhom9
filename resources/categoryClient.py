@@ -12,6 +12,9 @@ from resources.categoryCtrl import createCategory, deleteCategoryById
 # >>>>>>> Stashed changes
 def clientCategory():
   global state
+  print('Các danh mục hiện có')
+  for i in range(0, len(Categories)):
+      print(str(i+1) + '. ' + 'id: ' + str(Categories[i]['id']) + ', name: ' + Categories[i]['name'])
   print("Quản lí danh mục")
   print("1. Tạo danh mục")
   print("2. Xóa danh mục")

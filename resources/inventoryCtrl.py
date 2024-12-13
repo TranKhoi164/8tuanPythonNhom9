@@ -91,7 +91,7 @@ def showIN4inventory(n):
             listtrave.append(inve)
     return listtrave
 
-def getInventoriesById(id):
+def getInventoryById(id):
     resDict = {}
     for inve in Inventories:
         if inve["id"] == int(id):
