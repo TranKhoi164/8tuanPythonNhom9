@@ -1,12 +1,12 @@
-# from resources.utils.stringFunc import updatePriceStr
-# from resources.productCtrl import getProductById
-# from resources import inventoryCtrl
-# from resources.orderCtrl import createOrder, getOrderById
+from resources.utils.stringFunc import updatePriceStr
+from resources.productCtrl import getProductById
+from resources import inventoryCtrl, getInventoryById
+from resources.orderCtrl import createOrder, getOrderById
 
-from utils.stringFunc import updatePriceStr
-from productCtrl import getProductById
-from inventoryCtrl import getInventoryById
-from orderCtrl import createOrder, getOrderById
+# from utils.stringFunc import updatePriceStr
+# from productCtrl import getProductById
+# from inventoryCtrl import getInventoryById
+# from orderCtrl import createOrder, getOrderById
 
 
 def showOrderInfo(idOrder):

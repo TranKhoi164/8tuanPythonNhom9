@@ -1,5 +1,5 @@
 # attributes: {'màu': [...], 'size': [...]}
-attributes = {'màu': ['đỏ', 'tím'], 'size': ['l', 'xl', 'm'], 'chất liệu': ['cotton', 'cashmere']}
+attributes = {'màu': ['đỏ'], 'size': ['l']}
 tempAttributes = []
 
 obj = {}
@@ -20,9 +20,8 @@ def getAllProductType(n):
       tempAttributes.append(tempObj)
 
 
-def generateInventory(attributes):
-  attKeys = attributes.keys()
-  getAllProductType(0, attributes)
+getAllProductType(0)
+print(tempAttributes)
 
 
 # getAllProductType(0)

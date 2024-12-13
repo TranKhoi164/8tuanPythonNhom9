@@ -91,6 +91,19 @@ def showIN4inventory(n):
             listtrave.append(inve)
     return listtrave
 
+def getInventoryByProductIdAndAttribute(inventoryObj):
+    reqInventory = list(filter(
+        lambda i: i['attribute'] == inventoryObj['attribute'] and i['product'] == inventoryObj['productId'], Inventories))
+    if len(reqInventory) == 0:
+        raise Exception('Không còn sản phẩm trong kho!')
+    return reqInventory[len(reqInventory)-1]
+
+# def getInventory(inventoryDict):
+    
+
+def updateInventories(inventoriesDicts):
+    for i in inventoriesDicts:
+        updateInventory(i)
 
 def updateInventory(inventoryDict):
     reqInventory = list(filter(
@@ -98,7 +111,9 @@ def updateInventory(inventoryDict):
     if len(reqInventory) == 0:
         raise Exception(elementNotFound('inventory'))
     inventoryIndex = Inventories.index(reqInventory[0])
-    Inventories[inventoryIndex] = inventoryDict.copy()
+    for key in inventoryDict: 
+      Inventories[inventoryIndex][key] = inventoryDict[key]
+      
     msg = 'Cập nhật thành công!'
     return {'msg': msg, 'inventory': inventoryDict}
 # TODO: test updateInventory

@@ -85,8 +85,6 @@ while True:
   elif state['value'] == '101':
     # tao san pham
     productClient.clientCreateProduct()
-    print(globalVar.Attributes)
-    print(globalVar.Inventories)
     state['value'] = '1'
   elif state['value'] == '102':
     # xem chi tiet san pham

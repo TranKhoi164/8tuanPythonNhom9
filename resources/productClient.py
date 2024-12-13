@@ -7,14 +7,30 @@ from resources.productCtrl import (
     createProduct,
     getProductById,
     deleteProductById,
-    updateProductById
+    updateProductById,
 )
 from resources.utils.stringFunc import updatePriceStr
-from resources.utils.globalVar import collectionIds, Products, Attributes, state, role
-from resources.inventoryCtrl import createInventory, createInventories
-from resources.orderCtrl import createOrder
+from resources.utils.globalVar import (
+    collectionIds,
+    Products,
+    Attributes,
+    state,
+    Inventories,
+    Cart,
+    role,
+)
+from resources.inventoryCtrl import (
+    createInventory,
+    createInventories,
+    updateInventories,
+    getInventoryByProductIdAndAttribute,
+    updateInventory,
+    getInventoriesByProductId,
+)
+from resources.orderCtrl import createOrder, Orders
 from resources.cartCtrl import addToCart
 from resources.attributeCtrl import updateOrCreateAttribute
+import resources.categoryCtrl as categoryCtrl
 
 
 def showProductPreview(product):
@@ -46,6 +62,9 @@ def showProductDetail(product):
 
     print("id:", id)
     print(name)
+
+    reqCategory = categoryCtrl.getCategoryById(category)
+    print('Danh mục:', reqCategory['name'])
 
     print("Thuộc tính")
     for i in attributes:
@@ -79,38 +98,53 @@ obj = {}
 
 
 def getAllProductType(n, attributes):
+    print('newInventories: ', newInventories)
     global obj
     attKeys = list(attributes.keys())
+    print('obj: ', obj)
     if n > len(attKeys) - 1:
         return
     for i in range(0, len(attributes[attKeys[n]])):
         obj = {**obj, attKeys[n]: attributes[attKeys[n]][i]}
         if n < len(attKeys) - 1:
-            print(attributes[attKeys[n]][i])
+            # print(attributes[attKeys[n]][i])
             getAllProductType(n + 1, attributes)
         else:
             tempObj = {"attribute": {**obj}}
             newInventories.append(tempObj)
 
 
-def enterInventoryInfor(inventories):
+def enterInventoryInfor(inventories, minPrice, maxPrice):
+    print('inventories: ', inventories)
     inventoryList = []
+    newMinPrice = minPrice
+    newMaxPrice = maxPrice
+
     for i in range(0, len(inventories)):
         print(str(i + 1) + ".", inventories[i]["attribute"])
         price = input(
             "Nhập giá (mặc định " + updatePriceStr(inventories[i]["price"]) + "): "
         ).strip()
+        if price.isalnum() and int(price) < int(newMinPrice):
+            newMinPrice = price
+        if price.isalnum() and int(price) > int(newMaxPrice):
+            newMaxPrice = price
         quantity = input(
             "Nhập số lượng (mặc định " + str(inventories[i]["quantity"]) + "): "
         ).strip()
-        if price.isalnum() == False:
-            price = inventories[i]["price"]
-        if quantity.isalnum() == False:
-            quantity = inventories[i]["quantity"]
+
+        if not price.isalnum():
+            price = int(inventories[i]["price"])
+        if not quantity.isalnum():
+            quantity = int(inventories[i]["quantity"])
         inventoryList.append(
-            {**inventories[i]["attribute"], "price": price, "quantity": quantity}
+            {'attribute': inventories[i]["attribute"], "price": price, "quantity": quantity}
         )
-    return inventoryList
+    return {
+        "inventory": inventoryList,
+        "minPrice": newMinPrice,
+        "maxPrice": newMaxPrice,
+    }
 
 
 def enterAttributes():
@@ -152,22 +186,34 @@ def clientCreateProduct():
         # todo: basic infor
         newProduct["name"] = input("Nhập tên sản phẩm: ").strip().capitalize()
         newProduct["price"] = int(input("Nhập mức giá chung: "))
-        newProduct["minPrice"] = newProduct["price"]
-        newProduct["maxPrice"] = newProduct["price"]
         newProduct["quantity"] = int(input("Nhập số lượng chung: "))
-        newProduct["category"] = int(input("Nhập id danh mục: "))
+
+        # todo: category
+        categories = categoryCtrl.getCategories()
+        print("Các danh mục hiện có")
+        for i in range(len(categories)):
+            print(str(i+1) + ":", categories[i])
+        cate = int(input("Nhập id danh mục: "))
+        categoryCtrl.getCategoryById(int(cate))
+        newProduct["category"] = int(cate)
 
         # todo: attribute & inventory
         attributeDicts = enterAttributes()
+        print('attributeDict: ', attributeDicts)
 
         getAllProductType(0, attributeDicts)
+
         newInventoriesData = [
-            {**i, "price": newProduct["price"], "quantity": newProduct["quantity"]}
+            {**i, "price": int(newProduct["price"]), "quantity": int(newProduct["quantity"])}
             for i in newInventories
         ]
-        newInventoriesData = enterInventoryInfor(newInventoriesData)
+        reqInventoriesData = enterInventoryInfor(newInventoriesData, newProduct["price"], newProduct["price"])
+        newInventoriesData = reqInventoriesData["inventory"]
+        newProduct["minPrice"] = int(reqInventoriesData["minPrice"])
+        newProduct["maxPrice"] = int(reqInventoriesData["maxPrice"])
         newProduct["attributes"] = attributeDicts
-
+        newInventories.clear()
+        obj.clear()
         # todo: details
         detailsArr = enterDetails()
         newProduct["details"] = detailsArr
@@ -200,21 +246,9 @@ def clientCreateProduct():
         print("--------\n")
 
 
-def enterOrderInfor(attributes):
-    attributeDict = {}
-    for i in attributes:
-        attValue = input("Giá trị thuộc tính " + i + ": ").strip()
-        attributeDict[i] = attValue
-    orderQuantity = int(input("Số lượng: "))
-
-    print(attributeDict)
-    print("quantity:", orderQuantity)
-    orderDict = {}
-    return orderDict
-
-
 # TODO: state 102
 def clientProductDetail(productId):
+  try:
     product = getProductById(productId)
     showProductDetail(product)
 
@@ -231,16 +265,17 @@ def clientProductDetail(productId):
         )
 
         if detailOption == "1":
-            enterOrderInfor(product["attributes"])
+            clientBuyProduct(productId)
         elif detailOption == "2":
-            enterOrderInfor(product["attributes"])
+            clientAddProductToCart(productId)
         elif detailOption == "3":
             return
+  except Exception as e:
+      print('Lỗi: ', repr(e))
+      print('Tìm sản phẩm thất bại')
 
 
 # TODO: state 102_1 update product
-
-
 def clientUpdateProduct(productId):
     product = getProductById(productId)
     global newInventories
@@ -248,14 +283,14 @@ def clientUpdateProduct(productId):
         global Products, state, newInventories
         updatedProduct = dict()
         print("Chọn trường muốn cập nhật")
-        print("1. tên sản phẩm")
+        print("1. Tên sản phẩm")
         print("2. Mức giá chung")
         print("3. Số lượng chung")
         print("4. Danh mục")
         print("5. Thuộc tính sản phẩm")
         print("6. Chi tiết sản phẩm")
         print("7. Mô tả sản phẩm")
-        option = input().strip()
+        option = input('Chọn: ').strip()
 
         # newProduct['name'] = input('Nhập tên sản phẩm: ').strip().capitalize()
         # newProduct['price'] = int(input('Nhập mức giá chung: '))
@@ -268,54 +303,168 @@ def clientUpdateProduct(productId):
             updatedProduct["name"] = input("Nhập tên sản phẩm: ").strip().capitalize()
         elif option == "2":
             updatedProduct["price"] = int(input("Nhập mức giá chung: "))
-            updatedProduct["minPrice"] = updatedProduct["price"]
-            updatedProduct["maxPrice"] = updatedProduct["price"]
         elif option == "3":
             updatedProduct["quantity"] = int(input("Nhập số lượng chung: "))
-        elif option == '4':
-            updatedProduct["category"] = int(input("Nhập id danh mục: "))
-        elif option == '5':
+        elif option == "4":
+            print("Các danh mục hiện có")
+            categories = categoryCtrl.getCategories()
+            for i in range(len(categories)):
+                print(str(i) + ":", categories[i])
+            cate = int(input("Nhập id danh mục: "))
+            categoryCtrl.getCategoryById(int(cate))
+            updatedProduct["category"] = int(cate)
+        elif option == "5":
             # todo: attribute & inventory
             attributeDicts = enterAttributes()
+
+            productInventories = getInventoriesByProductId(product["id"])
+            for i in productInventories:
+                updateInventory({"id": i["id"], "quantity": 0})
 
             getAllProductType(0, attributeDicts)
             newInventoriesData = [
                 {
                     **i,
-                    "price": updatedProduct["price"],
-                    "quantity": updatedProduct["quantity"],
+                    "price": product["price"],
+                    "quantity": product["quantity"],
                 }
                 for i in newInventories
             ]
-            newInventoriesData = enterInventoryInfor(newInventoriesData)
+            reqInventoriesData = enterInventoryInfor(newInventoriesData, product["price"], product["price"])
+            newInventoriesData = reqInventoriesData["inventory"]
+            updatedProduct["minPrice"] = reqInventoriesData["minPrice"]
+            updatedProduct["maxPrice"] = reqInventoriesData["maxPrice"]
+
             updatedProduct["attributes"] = attributeDicts
-            newInventories = []
+            newInventories.clear()
+            obj.clear()
 
             newInventoriesData = [
-                {**i, "product": product["product"]["id"]}
-                for i in newInventoriesData
+                {**i, "product": product["id"]} for i in newInventoriesData
             ]
             createInventories(newInventoriesData)
-        elif option == '6':
+
+            if len(newInventoriesData) == 0:
+                newInventory = {
+                    "product": product["id"],
+                    "price": product["price"],
+                    "quantity": product["quantity"],
+                }
+                createInventory(newInventory)
+            print(Inventories)
+        elif option == "6":
             # todo: details
             detailsArr = enterDetails()
             updatedProduct["details"] = detailsArr
-        elif option == '7':
+        elif option == "7":
             # todo: description
             updatedProduct["description"] = input("Nhập mô tả: ").strip().capitalize()
 
-
         # todo: createProduct & inventories
-        reqUpdateProduct = updateProductById({'id': product['id'], **updatedProduct})
-
+        reqUpdateProduct = updateProductById({"id": product["id"], **updatedProduct})
 
         print()
         print(reqUpdateProduct["msg"])
         print("--------\n")
     except Exception as e:
-        print("Lỗi: ", repr(e))
-        print("Tạo sản phẩm thất bại!")
+        print('Lỗi: ', repr(e))
+        print("Cập nhật sản phẩm thất bại!")
         print("--------\n")
+
+
+# def createNewOrder(attributes):
+#     attributeDict = {}
+#     for i in attributes:
+#         attValue = input("Giá trị thuộc tính " + i + ": ").strip()
+#         attributeDict[i] = attValue
+#     orderQuantity = int(input("Số lượng: "))
+
+#     print(attributeDict)
+#     print("quantity:", orderQuantity)
+#     orderDict = {}
+#     return orderDict
+
+
+# todo: 102_2 buy product
+def clientBuyProduct(productId):
+    product = getProductById(productId)
+    try:
+        selectAttDict = {}
+        keys = product["attributes"].keys()
+        print("Nhập các lựa chọn")
+        for i in keys:
+            value = input(i + ": ").strip()
+            selectAttDict[i] = value
+        inventory = getInventoryByProductIdAndAttribute(
+            {"attribute": selectAttDict, "productId": product["id"]}
+        )
+
+        if inventory["quantity"] == 0:
+            raise Exception("Không còn sản phẩm trong kho!")
+        quantity = int(
+            input(
+                "Nhập số lượng muốn mua(còn "
+                + str(inventory["quantity"])
+                + " sản phẩm): "
+            ).strip()
+        )
+
+        if quantity > inventory["quantity"] or quantity < 0:
+            raise Exception("Số lượng không khả dụng!")
+
+        updateInventory(
+            {"id": inventory["id"], "quantity": (inventory["quantity"] - quantity)}
+        )
+        newOrder = {
+            "quantity": quantity,
+            "product": productId,
+            "inventory": inventory["id"],
+            "attribute": selectAttDict,
+            "status": "done",
+        }
+        createOrder(newOrder)
+        print("Mua thành công!")
+    except Exception as e:
+        print("Lỗi: ", repr(e))
+        print("Mua sản phẩm thất bại!")
+
+
+# todo: state 102_3 add product to cart
+def clientAddProductToCart(productId):
+    product = getProductById(productId)
+    try:
+        selectAttDict = {}
+        keys = product["attributes"].keys()
+        print("Nhập các lựa chọn")
+        for i in keys:
+            value = input(str(i) + ": ")
+            selectAttDict[i] = value
+        inventory = getInventoryByProductIdAndAttribute(
+            {"attribute": selectAttDict, "productId": product["id"]}
+        )
+
+        if inventory["quantity"] == 0:
+            raise Exception("Không còn sản phẩm trong kho!")
+        quantity = int(
+            input(
+                "Nhập số lượng muốn mua(còn "
+                + str(inventory["quantity"])
+                + " sản phẩm): "
+            ).strip()
+        )
+        newOrder = {
+            "quantity": quantity,
+            "product": productId,
+            "inventory": inventory["id"],
+            "attribute": selectAttDict,
+            "status": "pending",
+        }
+        reqOrder = createOrder(newOrder)
+        addToCart(reqOrder["id"])
+        print("Thêm vào giỏ hàng thành công!")
+    except Exception as e:
+        print("Lỗi: ", repr(e))
+        print("Thêm vào giỏ hàng thất bại!")
 
 
 def clientDeleteProduct(productId):
