@@ -94,10 +94,8 @@ obj = {}
 
 
 def getAllProductType(n, attributes):
-    print("newInventories: ", newInventories)
     global obj
     attKeys = list(attributes.keys())
-    print("obj: ", obj)
     if n > len(attKeys) - 1:
         return
     for i in range(0, len(attributes[attKeys[n]])):
@@ -111,7 +109,6 @@ def getAllProductType(n, attributes):
 
 
 def enterInventoryInfor(inventories, minPrice, maxPrice):
-    print("inventories: ", inventories)
     inventoryList = []
     newMinPrice = minPrice
     newMaxPrice = maxPrice
@@ -199,7 +196,6 @@ def clientCreateProduct():
 
         # todo: attribute & inventory
         attributeDicts = enterAttributes()
-        print("attributeDict: ", attributeDicts)
 
         getAllProductType(0, attributeDicts)
 
