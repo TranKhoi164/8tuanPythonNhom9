@@ -28,14 +28,14 @@ def clientAddress():
     show_addresses()
     print("1. Thêm địa chỉ")
     print("2. Sửa địa chỉ")
+    print("3. Thoát")
     select=int(input('Chọn: '))
     if select==1:
         clientCreateAddress()
     elif select==2:
         clientUpdateAddress()
     else:
-        print("Lựa chọn không khả dụng,vui lòng thực hiện lại!")
-        clientAddress()
+        return
 
 def enterAddress():
     newadd={}

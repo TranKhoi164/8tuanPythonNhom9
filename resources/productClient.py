@@ -226,16 +226,16 @@ def clientCreateProduct():
         # todo: createProduct & inventories
         reqCreateProduct = createProduct(newProduct)
         newInventoriesData = [
-            {**i, "product": reqCreateProduct["product"]["id"]}
+            {**i, "product": int(reqCreateProduct["product"]["id"])}
             for i in newInventoriesData
         ]
         createInventories(newInventoriesData)
 
         if len(newInventoriesData) == 0:
             newInventory = {
-                "product": reqCreateProduct["product"]["id"],
-                "price": newProduct["price"],
-                "quantity": newProduct["quantity"],
+                "product": int(reqCreateProduct["product"]["id"]),
+                "price": int(newProduct["price"]),
+                "quantity": int(newProduct["quantity"]),
             }
             createInventory(newInventory)
 
@@ -430,11 +430,11 @@ def clientBuyProduct(productId):
             ).strip()
         )
 
-        if quantity > inventory["quantity"] or quantity < 0:
+        if quantity > int(inventory["quantity"]) or quantity < 0:
             raise Exception("Số lượng không khả dụng!")
 
         updateInventory(
-            {"id": inventory["id"], "quantity": (inventory["quantity"] - quantity)}
+            {"id": inventory["id"], "quantity": (int(inventory["quantity"]) - int(quantity))}
         )
         newOrder = {
             "quantity": quantity,
