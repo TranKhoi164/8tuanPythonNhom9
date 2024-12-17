@@ -69,14 +69,14 @@ Giỏ hàng:
 Đơn hàng:
 - Xem các đơn hàng đã thanh toán: khánh
 
-<!-- Service chịu trách nghiệm cụ thể -->
-product(productClient, productCtrl): khôi
-attribute(attributeCtrl): hiếu
-category(categoryClient, categoryCtrl): hiếu
-address(addressClient, addressCtrl): quang
-inventory(inventoryCtrl): quang
-order(orderClient, orderCtrl): khánh
-cart(cartClient, cartCtrl): hùng
+## Service chịu trách nghiệm cụ thể 
+- product(productClient, productCtrl): khôi
+- attribute(attributeCtrl): hiếu
+- category(categoryClient, categoryCtrl): hiếu
+- address(addressClient, addressCtrl): quang
+- inventory(inventoryCtrl): quang
+- order(orderClient, orderCtrl): khánh
+- cart(cartClient, cartCtrl): hùng
 
 
 ## Database
