@@ -58,7 +58,7 @@ def customerClient():
   productClient.showProductsPreview(Products)
   print('1. Xem sản phẩm')
   print('2. Giỏ hàng')
-  print('3. Đơn hàng của bạn')
+  print('3. Đơn hàng đã thanh toán')
   print('4. Thông tin địa chỉ')
   print('5. Quay lại')
 

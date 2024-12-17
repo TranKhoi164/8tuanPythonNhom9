@@ -95,7 +95,9 @@ obj = {}
 
 def getAllProductType(n, attributes):
     global obj
-    attKeys = list(attributes.keys())
+    attKeys = list(attributes.keys()) 
+    # mau size chatvai
+
     if n > len(attKeys) - 1:
         return
     for i in range(0, len(attributes[attKeys[n]])):

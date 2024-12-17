@@ -8,7 +8,7 @@ Bài kiểm tra 8 tuần python nhóm 9
 - updateProduct(productId) - admin
 - deleteProduct(productId) - admin
 - getProducts ()
-- getProduct(productId)
+- getProduct(productId) 
 
 #### inventory:
 - createInventory(productId, attributes, quantity, price)
@@ -50,13 +50,34 @@ orderDict: {productId, inventoryId, addressId, status, quantity}
 - purchaseOrders(orderIdList)
   
 
-## Phân công
-- product: Khoi
-- inventory, address: quang
-- category, attribute: hieu
+## Tính năng tham gia
+Sản phẩm:
+- Tạo sản phẩm: khôi, quang, hiếu
+- Xem tóm tắt các sản phẩm: khôi
+- Xem chi tiết sản phẩm: khôi, quang, hiếu
+- Cập nhật thông tin sản phẩm: khôi, quang, hiếu
+- Mua sản phẩm: khôi, quang, hiếu, khánh
+- Thêm sản phẩm vào giỏ hàng: khôi, quang, hiếu, khánh, hùng
+Danh mục:
+- Quản lý danh mục: hiếu
+Địa chỉ:
+- Quản lý địa chỉ: quang
+Giỏ hàng:
+- Xem các đơn hàng trong giỏ hàng: hùng, khánh
+- Thanh toán đơn hàng trong giỏ: hùng, khánh
+- Xoá đơn hàng trong giỏ: hùng, khánh
+Đơn hàng:
+- Xem các đơn hàng đã thanh toán: khánh
 
-- cart: hung
-- order: khanh
+<!-- Service chịu trách nghiệm cụ thể -->
+product(productClient, productCtrl): khôi
+attribute(attributeCtrl): hiếu
+category(categoryClient, categoryCtrl): hiếu
+address(addressClient, addressCtrl): quang
+inventory(inventoryCtrl): quang
+order(orderClient, orderCtrl): khánh
+cart(cartClient, cartCtrl): hùng
+
 
 ## Database
 <img width="672" alt="Ảnh chụp Màn hình 2024-12-13 lúc 14 07 14" src="https://github.com/user-attachments/assets/a042147d-4794-497d-949e-a73951408eed" />

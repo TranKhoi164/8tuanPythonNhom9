@@ -72,24 +72,3 @@ def clientDeleteCategory():
     
 # clientDeleteCategory()
 # print(Categories)
-
-# while True:
-#     if state == '0':
-#         clientCategory()
-#         print(Categories)
-      
-#     elif state =='1':
-#         clientCreateCategory()
-#         print(Categories)
-#         state = '0'
-#     elif state == '2':
-#         clientDeleteCategory()
-#         print(Categories)
-#         state = '0'
-#     elif state  == 'exit':
-#         print("Kết thúc chương trình.")
-#         break
-#     else:
-#         print("Lỗi trạng thái không hợp lệ!")
-#         break
-# # >>>>>>> Stashed changes

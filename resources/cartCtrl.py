@@ -19,12 +19,16 @@ def removeFromCart(orderId):
   global Cart
   try:
     reqOrder = list(filter(lambda item: item['order'] == orderId, Cart))
+
+    if len(reqOrder) == 0:
+      return Exception(elementNotFound('đơn hàng')) 
+
     Cart.remove(reqOrder[0])
 
     msg = 'Xóa đơn hàng thành công!'
     return msg
   except Exception as e: 
-    raise Exception(elementNotFound('sản phẩm')) 
+    raise Exception(elementNotFound('đơn hàng')) 
 
 # todo test addTocart
 # addToCart(1)

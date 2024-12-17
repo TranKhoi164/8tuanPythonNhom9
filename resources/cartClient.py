@@ -11,13 +11,18 @@ import resources.utils.globalVar as globalVar
 
 
 def clientPurchaseOrder():
-  orderId = int(input('Id đơn hàng muốn thanh toán: ').strip())
+  try:
+    orderId = int(input('Id đơn hàng muốn thanh toán: ').strip())
 
-  orderCtrl.updateOrderById({'id': orderId, 'status': 'done'})
-  cartCtrl.removeFromCart(orderId)
+    print('oid: ', orderId)
+    orderCtrl.updateOrderById({'id': orderId, 'status': 'done'})
+    cartCtrl.removeFromCart(orderId)
 
-  print('Thanh toán đơn hàng thành công!')
-  print('--------\n')
+    print('Thanh toán đơn hàng thành công!')
+    print('--------\n')
+  except Exception as e:
+    print('Lỗi: ', repr(e))
+    print('Không thành công!')
 
 def clientRemoveOrderFromCart():
   orderId = int(input('Id đơn hàng muốn xóa: ').strip())
@@ -28,19 +33,19 @@ def clientRemoveOrderFromCart():
   print('Xóa đơn hàng thành công!')
   print('--------\n')
 
-def clientPurchaseAllOrders():
-  print('cart: ', Cart)
-  for i in Cart:
-    orderCtrl.updateOrderById({'id': int(i['order']), 'status': 'done'})
-    cartCtrl.removeFromCart(i['order'])
-    # orderCtrl.deleteOrders(i['id'])
-  print(globalVar.Orders)
-  print("Thanh toán toàn bộ thành công!")
-  print('--------\n')
+# def clientPurchaseAllOrders():
+#   print('cart: ', Cart)
+#   for i in Cart:
+#     orderCtrl.updateOrderById({'id': int(i['order']), 'status': 'done'})
+#     cartCtrl.removeFromCart(i['order'])
+#     # orderCtrl.deleteOrders(i['id'])
+#   print(globalVar.Orders)
+#   print("Thanh toán toàn bộ thành công!")
+#   print('--------\n')
 
 def showCartItems():
   for i in Cart:
-    orderClient.showOrderInfo(i['id'])
+    orderClient.showOrderInfo(i['order'])
     print('--------')
 
 def clientCart():
@@ -57,8 +62,8 @@ def clientCart():
     clientPurchaseOrder()
   elif select == '2':
     clientRemoveOrderFromCart()
-  elif select == '3':
-    clientPurchaseAllOrders()
+  # elif select == '3':
+  #   clientPurchaseAllOrders()
   else:
     return
 

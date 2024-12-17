@@ -20,7 +20,7 @@ def showOrderInfo(idOrder):
     namePro = product["name"]
     print("   " + "id:" + str(order["id"]))
     # print(f'   Đơn hàng tạo vào lúc: {order['createdAt']}')
-    print('   Đơn hàng tạo vào lúc:', order['createdAt'])
+    print('   Đơn hàng tạo vào lúc:', str(order['createdAt']))
     print("   Số lượng:", order["quantity"])
     print("   Sản phẩm:", namePro)
     print(f'   Giá tiền: {updatePriceStr(product['price'] * order['quantity'])}')
@@ -54,7 +54,7 @@ def showOrderStatus(status="done"):
 
         print("   " + "id:" + " " + str(order["id"]))
         # print(f'   Đơn hàng tạo vào lúc: {order['createdAt']}')
-        print('   Đơn hàng tạo vào lúc:', order['createdAt'])
+        print('   Đơn hàng tạo vào lúc:', str(order['createdAt']))
         print("   Số lượng:", order["quantity"])
         print("   Sản phẩm:", namePro)
         print(f'   Giá tiền: {updatePriceStr(product['price'] * order['quantity'])}')

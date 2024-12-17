@@ -48,26 +48,26 @@ def createInventories(inventories):
 # print(Inventories)
 
 
-def them_san_pham(n):
-    try:
-        newinventory = {
-            "product": None,
-            "attribute": {"màu ": None, "kích thước": None},
-            "quantity": None,
-            "price": None,
-        }
+# def them_san_pham(n):
+#     try:
+#         newinventory = {
+#             "product": None,
+#             "attribute": {"màu ": None, "kích thước": None},
+#             "quantity": None,
+#             "price": None,
+#         }
 
-        newinventory = n
-        collectionIds['inventoryId'] += 1
-        newinventoryID = {'id': collectionIds['inventory']}
-        newinventoryID.update(newinventory)
-        Inventories.append(newinventoryID)
+#         newinventory = n
+#         collectionIds['inventoryId'] += 1
+#         newinventoryID = {'id': collectionIds['inventory']}
+#         newinventoryID.update(newinventory)
+#         Inventories.append(newinventoryID)
 
-        msd = 'thành công!'
-        return msd
-    except:
-        mss = "LỖI"
-        return mss
+#         msd = 'thành công!'
+#         return msd
+#     except:
+#         mss = "LỖI"
+#         return mss
 
 
 def getInventoriesByProductId(n):
@@ -83,13 +83,13 @@ def getInventoriesByProductId(n):
 # print(getInventoriesByProductId(test))
 
 
-def showIN4inventory(n):
-    n = int(n)
-    listtrave = []
-    for inve in Inventories:
-        if inve["id"] == n:
-            listtrave.append(inve)
-    return listtrave
+# def showIN4inventory(n):
+#     n = int(n)
+#     listtrave = []
+#     for inve in Inventories:
+#         if inve["id"] == n:
+#             listtrave.append(inve)
+#     return listtrave
 
 def getInventoryById(id):
     resDict = {}
