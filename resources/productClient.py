@@ -397,7 +397,6 @@ def clientBuyProduct(productId):
         # todo: addrerss
         print("Các địa chỉ hiện có")
         addresses = addressCtrl.getAddresses()
-        print(addresses)
         for i in range(0, len(addresses)):
             print(
                 str(i + 1) + ". " + 
@@ -510,11 +509,11 @@ def clientAddProductToCart(productId):
         print("Thêm vào giỏ hàng thất bại!")
 
 
-def clientDeleteProduct(productId):
-    try:
-        print(deleteProductById(productId))
-    except Exception as e:
-        print(e)
+# def clientDeleteProduct(productId):
+#     try:
+#         print(deleteProductById(productId))
+#     except Exception as e:
+#         print(e)
 
 
 # clientCreateProduct()
