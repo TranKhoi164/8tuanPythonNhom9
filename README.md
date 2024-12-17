@@ -51,23 +51,23 @@ orderDict: {productId, inventoryId, addressId, status, quantity}
   
 
 ## Tính năng tham gia
-Sản phẩm:
-- Tạo sản phẩm: khôi, quang, hiếu
-- Xem tóm tắt các sản phẩm: khôi
-- Xem chi tiết sản phẩm: khôi, quang, hiếu
-- Cập nhật thông tin sản phẩm: khôi, quang, hiếu
-- Mua sản phẩm: khôi, quang, hiếu, khánh
-- Thêm sản phẩm vào giỏ hàng: khôi, quang, hiếu, khánh, hùng
-Danh mục:
-- Quản lý danh mục: hiếu
+- Sản phẩm:
++ Tạo sản phẩm: khôi, quang, hiếu
++ Xem tóm tắt các sản phẩm: khôi
++ Xem chi tiết sản phẩm: khôi, quang, hiếu
++ Cập nhật thông tin sản phẩm: khôi, quang, hiếu
++ Mua sản phẩm: khôi, quang, hiếu, khánh
++ Thêm sản phẩm vào giỏ hàng: khôi, quang, hiếu, khánh, hùng
+- Danh mục:
++ Quản lý danh mục: hiếu
 Địa chỉ:
-- Quản lý địa chỉ: quang
-Giỏ hàng:
-- Xem các đơn hàng trong giỏ hàng: hùng, khánh
-- Thanh toán đơn hàng trong giỏ: hùng, khánh
-- Xoá đơn hàng trong giỏ: hùng, khánh
++ Quản lý địa chỉ: quang
+- Giỏ hàng:
++ Xem các đơn hàng trong giỏ hàng: hùng, khánh
++ Thanh toán đơn hàng trong giỏ: hùng, khánh
++ Xoá đơn hàng trong giỏ: hùng, khánh
 Đơn hàng:
-- Xem các đơn hàng đã thanh toán: khánh
++ Xem các đơn hàng đã thanh toán: khánh
 
 ## Service chịu trách nghiệm cụ thể 
 - product(productClient, productCtrl): khôi
